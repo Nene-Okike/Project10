@@ -65,13 +65,17 @@ Click on the Domain name and click on DNS and select custom name server and copy
 
 So we create two A records to point to our Load balancer IP
 
-Confirm connection  to Web Servers from your browser using the new domain name HTTP protocol – http://doolings.tech
-
 5. Configure Nginx to recognize new domain name - doolings.tech
 
 vi into nginx default configuration file and add
 
  server_name www.doolings.tech instead of server_name www.domain.com
+
+
+ 6.  Confirm connection  to Web Servers from your browser using the new domain name HTTP protocol – http://doolings.tech
+
+
+ ![httpinsecure](httpconnection.png)
 
  6. Install certbot and request for an SSL/TLS certificate
 
@@ -89,16 +93,33 @@ Test secured access to your Web Solution by trying to reach
 https://doolings.tech
 
 
-7. Set up periodical renewal of your SSL/TLS certificate
+![httpssecure](httpsconnection.png)
 
-use this command to test for certificate renewal
+
+7. Click on the lock sign to see certificate information
+
+
+![certificate](certificateinformation.png)
+
+8. Set up periodical renewal of your SSL/TLS certificate
+
+use this command to test for certificate renewal and see this output
+
+
+sudo certbot renew --dry-run
+
+![certrenewal](certrenewal.png)
+
 
 Set up a cronjob renewal of the certificate by the crontab -e file with this command
 
 * */12 * * *   root /usr/bin/certbot renew > /dev/null 2>&1
 
 
-sudo certbot renew --dry-run
 
+![crontabjob](cronjobsetup.png)
+
+
+The end
 
 
